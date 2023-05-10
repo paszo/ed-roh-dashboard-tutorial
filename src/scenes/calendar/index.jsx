@@ -1,9 +1,6 @@
 import { useState } from "react";
-// import FullCalendar, { formatDate } from "@fullcalendar/react";
 import { formatDate } from "@fullcalendar/core";
-
 import FullCalendar from "@fullcalendar/react";
-
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
@@ -63,7 +60,7 @@ const Calendar = () => {
                   {currentEvents.map((event) => (
                       <ListItem
                       key={event.id}
-                      sx={{backgroundColro: colors.greeAccent[500], margin: "10px 0", borderRadius: "2px"}}
+                      sx={{backgroundColor: colors.greenAccent[500], margin: "10px 0", borderRadius: "2px"}}
                       >
                           <ListItemText
                           primary={event.title}
@@ -83,6 +80,38 @@ const Calendar = () => {
 
 
           </Box>
+          {/* CALENDAR */}
+          <Box flex="1 1 100%" ml="15px">
+                <FullCalendar
+                    height="75vh"
+                    plugins={[
+                            dayGridPlugin,
+                        timeGridPlugin,
+                        interactionPlugin,
+                        listPlugin
+                        ]}
+                    headerToolbar={{
+                        left: "prev,next,today",
+                        center: "title",
+                        right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth"
+                    }}
+                    initialView="dayGridMonth"
+                    editable={true}
+                    selectable={true}
+                    selectMirror={true}
+                    dayMaxEvents={true}
+                    select={handleDateClick}
+                    eventClick={handleEventClick}
+                    eventsSet={(events) => setCurrentEvents(events)}
+                    initialEvents={[
+                        {id: "1234", title: "All-day event", date: "2023-05-09"},
+                        {id: "4312", title: "fff-day event", date: "2023-05-16"},
+                    ]}
+                >
+
+                </FullCalendar>
+          </Box>
+
       </Box>
     </Box>
   );
